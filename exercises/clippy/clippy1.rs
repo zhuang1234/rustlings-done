@@ -1,17 +1,16 @@
 // clippy1.rs
-// The Clippy tool is a collection of lints to analyze your code
-// so you can catch common mistakes and improve your Rust code.
+//Clippy 工具是用于分析代码的 lints 集合
+//这样你就可以发现常见的错误并改进你的 Rust 代码。
 //
-// For these exercises the code will fail to compile when there are clippy warnings
-// check clippy's suggestions from the output to solve the exercise.
-// Execute `rustlings hint clippy1` or use the `hint` watch subcommand for a hint.
-
-// I AM NOT DONE
+//对于这些练习，当出现 clippy 警告时，代码将无法编译
+//从输出中检查 clippy 的建议以解决练习。
+//执行 `rustlings hint clippy1` 或使用 `hint` watch 子命令获取提示。
+//Clippy 检查浮点文本，这些浮点文本分别近似于 std::f32::consts 或 std::f64::consts 中定义的常量，建议使用预定义的常量
 
 use std::f32;
 
 fn main() {
-    let pi = 3.14f32;
+    let pi = f32::consts::PI;
     let radius = 5.00f32;
 
     let area = pi * f32::powi(radius, 2);
