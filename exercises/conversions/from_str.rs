@@ -28,8 +28,6 @@ enum ParsePersonError {
     ParseInt(ParseIntError),
 }
 
-// I AM NOT DONE
-
 //脚步：
 //1. 如果提供的字符串长度为0，应该返回错误
 //2. 将给定的字符串拆分为其中存在的逗号
@@ -54,13 +52,15 @@ impl FromStr for Person {
             if data[0].is_empty() {
                 return Err(ParsePersonError::NoName);
             };
-            let age: usize = data[1]
-                .parse()
-                .map_err(ParsePersonError::ParseInt(ParseIntError))?;
-            Ok(Person {
-                name: data[0].to_string(),
-                age: age,
-            })
+            match data[1].parse::<usize>() {
+                Ok(age) => {
+                    return Ok(Person {
+                        name: data[0].to_string(),
+                        age: age,
+                    })
+                }
+                Err(ParseIntError) => Err(ParsePersonError::ParseInt(ParseIntError)),
+            }
         } else {
             Err(ParsePersonError::BadLen)
         }

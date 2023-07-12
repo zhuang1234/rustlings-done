@@ -20,25 +20,37 @@ impl Default for Person {
     }
 }
 
-// Your task is to complete this implementation
-// in order for the line `let p = Person::from("Mark,20")` to compile
-// Please note that you'll need to parse the age component into a `usize`
-// with something like `"4".parse::<usize>()`. The outcome of this needs to
-// be handled appropriately.
+//你的任务是完成这个实现
+//为了编译 `let p = Person::from("Mark,20")` 行
+//请注意，您需要将年龄组件解析为“usize”
+//类似于`"4".parse::<usize>()`。这个结果需要
+//适当处理。
 //
-// Steps:
-// 1. If the length of the provided string is 0, then return the default of Person
-// 2. Split the given string on the commas present in it
-// 3. Extract the first element from the split operation and use it as the name
-// 4. If the name is empty, then return the default of Person
-// 5. Extract the other element from the split operation and parse it into a `usize` as the age
-// If while parsing the age, something goes wrong, then return the default of Person
-// Otherwise, then return an instantiated Person object with the results
-
-// I AM NOT DONE
+//脚步：
+//1.如果提供的字符串长度为0，则返回默认的Person
+//2. 用逗号分割给定的字符串
+//3. 从 split 操作中提取第一个元素并将其用作名称
+//4.如果name为空，则返回默认的Person
+//5. 从 split 操作中提取另一个元素并将其解析为 `usize` 作为年龄
+//如果解析年龄时出现问题，则返回 Person 的默认值
+//否则，则返回带有结果的实例化 Person 对象
+//我还没做完
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        let vec_s: Vec<&str> = s.split(',').collect();
+        if vec_s.len() == 2 && vec_s[0].len() > 0 {
+            match vec_s[1].parse::<usize>() {
+                Ok(age) => {
+                    return Self {
+                        name: vec_s[0].to_string(),
+                        age: age,
+                    }
+                }
+                Err(_) => return Person::default(),
+            }
+        }
+        Person::default()
     }
 }
 
